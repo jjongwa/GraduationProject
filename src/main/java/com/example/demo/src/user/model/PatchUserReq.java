@@ -11,3 +11,4 @@ public class PatchUserReq {
     private int userIdx;
     private String userName;
 }
+/**안바꿈**/

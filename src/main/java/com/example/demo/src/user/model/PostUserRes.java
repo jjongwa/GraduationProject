@@ -11,3 +11,4 @@ public class PostUserRes {
     private String jwt;
     private int userIdx;
 }
+/**안바꿈**/

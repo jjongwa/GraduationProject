@@ -31,6 +31,30 @@ public class UserProvider {
         this.jwtService = jwtService;
     }
 
+    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException{
+        String userId = postLoginReq.getUserId();
+        String userPw = postLoginReq.getUserPw();
+        if(userDao.checkUserId(userId) == 0){   // 아이디 확인
+            throw new BaseException(USERS_EMPTY_USER_ID);   //USERS_EMPTY_USER_ID(false, 2010, "일치하는 아이디 없음.")
+        }
+        if(userDao.checkUserPw(userId, userPw) == 0){   // 비밀번호 확인
+            throw new BaseException(USERS_EMPTY_USER_PW);   //USERS_EMPTY_USER_PW(false, 2011, "일치하는 비밀번호 없음.")
+        }
+        System.out.println("아이디, 비밀번호 확인");
+
+        try {
+            PostLoginRes loginUserIdx = userDao.loginUser(userId, userPw);
+            return loginUserIdx;
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+
+
+
+
+/**
     public List<GetUserRes> getUsers() throws BaseException{
         try{
             List<GetUserRes> getUserRes = userDao.getUsers();
@@ -88,5 +112,5 @@ public class UserProvider {
         }
 
     }
-
+**/
 }

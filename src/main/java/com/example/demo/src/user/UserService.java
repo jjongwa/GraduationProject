@@ -31,6 +31,11 @@ public class UserService {
 
     }
 
+
+
+
+
+    /**
     //POST
     public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
         //중복
@@ -67,4 +72,5 @@ public class UserService {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+     **/
 }
