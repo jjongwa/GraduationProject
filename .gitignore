@@ -2,3 +2,4 @@
 logs/
 src/main/java/com/example/demo/config/secret/
 src/main/java/com/example/demo/utils/
+build/
