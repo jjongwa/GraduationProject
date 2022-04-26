@@ -28,10 +28,26 @@ public class UserService {
         this.userDao = userDao;
         this.userProvider = userProvider;
         this.jwtService = jwtService;
-
     }
 
+    //POST
+    // 회원가입 서비스
+    public PostUserRes createUser(PostUserReq postUseReq) throws BaseException {
+        try{
+            // 우선 아이디 중복확인 거쳤다고 치자
+            // 비밀번호1과 2가 일치하는지 확인
+            if(postUseReq.getUserPw_1() != postUseReq.getUserPw_2()) {
+                throw new BaseException(DATABASE_ERROR);        // 에러코드 변경 필요
+            }
+            // createDao 이용해 게정 생성하고
+            // idx, Id, Pw, userName 받아서 다시 반환
 
+
+            return  new PostUserRes();
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 
 
 

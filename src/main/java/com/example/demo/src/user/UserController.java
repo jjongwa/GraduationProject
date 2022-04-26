@@ -28,17 +28,30 @@ public class UserController {
     private final JwtService jwtService;
 
 
-
-
     public UserController(UserProvider userProvider, UserService userService, JwtService jwtService){
         this.userProvider = userProvider;
         this.userService = userService;
         this.jwtService = jwtService;
     }
 
+
+/**
+ * 아이디 중복확인 API -> 회원가입 하기 전 필요
+ * [POST] /users/checkId
+ * @return  -> int?
+ */
+
+
+
+
+/**
+ * 회원가입 API
+ * [POST] /users
+ * @return  -> BaseResponse<PostLoginRes>
+ */
     @ResponseBody
-    @PostMapping("/logIn")
-    public BaseResponse<PostLoginRes> logIn(@RequestBody PostLoginReq postLoginReq){
+    @PostMapping("")
+    public BaseResponse<PostLoginRes> createUser(@RequestBody PostLoginReq postLoginReq){
         try{
             PostLoginRes postLoginRes = userProvider.logIn(postLoginReq);
             return new BaseResponse<>(postLoginRes);
@@ -46,6 +59,36 @@ public class UserController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
+
+
+
+/**
+ * 로그인 API
+ * [POST] /users/lonIn
+ * @return BaseResponse<PostLoginRes>
+ */
+    @ResponseBody
+    @PostMapping("/logIn")
+    public BaseResponse<PostUserRes> logIn(@RequestBody PostUserReq postUserReq){
+
+
+
+        try{
+            PostUserRes postUserRes = userService.createUser(postUserReq);
+            return new BaseResponse<>(postUserRes);
+        } catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 }
 
