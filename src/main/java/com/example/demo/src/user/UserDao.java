@@ -19,6 +19,21 @@ public class UserDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
+    /**
+     * 새로운 User 생성
+     * @return int (생성한 유저의 idx를 반환)
+     */
+    public int createUser(PostUserReq postUserReq){
+        System.out.println("dao 진입");
+        String createUserQuery = "insert into User (userId, userPw, userName) VALUES (?,?,?);";
+        this.jdbcTemplate.update(createUserQuery, postUserReq.getUserId(), postUserReq.getUserPw_1(), postUserReq.getUserName());
+        String lastInsertIdxQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdxQuery, int.class);
+    }
+
+
+
     /**
      * userIdx로 User 정보 검색
      * @return GetUserRes

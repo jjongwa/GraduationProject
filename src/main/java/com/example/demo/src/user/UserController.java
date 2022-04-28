@@ -51,11 +51,12 @@ public class UserController {
  */
     @ResponseBody
     @PostMapping("")
-    public BaseResponse<PostLoginRes> createUser(@RequestBody PostLoginReq postLoginReq){
+    public BaseResponse<PostUserRes> createUser(@RequestBody PostUserReq postUserReq){
         try{
-            PostLoginRes postLoginRes = userProvider.logIn(postLoginReq);
-            return new BaseResponse<>(postLoginRes);
+            PostUserRes postUserRes = userService.createUser(postUserReq);
+            return new BaseResponse<>(postUserRes);
         } catch (BaseException exception){
+            System.out.println("컨트롤러 예외처리 구문");
             return new BaseResponse<>(exception.getStatus());
         }
     }
@@ -70,9 +71,6 @@ public class UserController {
     @ResponseBody
     @PostMapping("/logIn")
     public BaseResponse<PostUserRes> logIn(@RequestBody PostUserReq postUserReq){
-
-
-
         try{
             PostUserRes postUserRes = userService.createUser(postUserReq);
             return new BaseResponse<>(postUserRes);

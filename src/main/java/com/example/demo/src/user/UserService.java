@@ -32,18 +32,24 @@ public class UserService {
 
     //POST
     // 회원가입 서비스
-    public PostUserRes createUser(PostUserReq postUseReq) throws BaseException {
+    public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
+        // 우선 아이디 중복확인 거쳤다고 치자
+        // 비밀번호1과 2가 일치하는지 확인
         try{
-            // 우선 아이디 중복확인 거쳤다고 치자
-            // 비밀번호1과 2가 일치하는지 확인
-            if(postUseReq.getUserPw_1() != postUseReq.getUserPw_2()) {
-                throw new BaseException(DATABASE_ERROR);        // 에러코드 변경 필요
+            if(!postUserReq.getUserPw_1().equals(postUserReq.getUserPw_2())) {
+                System.out.println("비번 불일치");
+                throw new BaseException(WRONG_EACH_PW);
             }
+        }catch (Exception exception){
+            throw new BaseException(WRONG_EACH_PW);
+        }
+
+        try{
             // createDao 이용해 게정 생성하고
             // idx, Id, Pw, userName 받아서 다시 반환
+            int userIdx = userDao.createUser(postUserReq);
 
-
-            return  new PostUserRes();
+            return  new PostUserRes(userIdx, postUserReq.getUserId(), postUserReq.getUserPw_1(), postUserReq.getUserName());
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }

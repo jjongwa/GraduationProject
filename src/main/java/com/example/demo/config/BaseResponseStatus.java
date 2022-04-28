@@ -25,6 +25,7 @@ public enum BaseResponseStatus {
     // users
     USERS_EMPTY_USER_ID(false, 2010, "일치하는 아이디 없음."),
     USERS_EMPTY_USER_PW(false, 2011, "일치하는 비밀번호 없음."),
+    WRONG_EACH_PW(false, 2012, "비밀번호 1과 2가 일치하지 않음."),
 
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),

@@ -13,4 +13,3 @@ public class PostUserRes {
     private String userPw;
     private String userName;
 }
-/**안바꿈**/
