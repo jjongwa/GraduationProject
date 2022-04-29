@@ -31,19 +31,21 @@ public class UserService {
     }
 
     //POST
+    // 회원가입에서 아이디 중복 확인
+    public int checkUserId(PostCheckIdReq postCheckIdReq) throws BaseException {
+        try {
+            int checkId = userDao.checkUserId(postCheckIdReq.getUserId());
+            return checkId;
+        }
+        catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    //POST
     // 회원가입 서비스
     public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
         // 우선 아이디 중복확인 거쳤다고 치자
-        // 비밀번호1과 2가 일치하는지 확인
-        try{
-            if(!postUserReq.getUserPw_1().equals(postUserReq.getUserPw_2())) {
-                System.out.println("비번 불일치");
-                throw new BaseException(WRONG_EACH_PW);
-            }
-        }catch (Exception exception){
-            throw new BaseException(WRONG_EACH_PW);
-        }
-
         try{
             // createDao 이용해 게정 생성하고
             // idx, Id, Pw, userName 받아서 다시 반환
@@ -57,42 +59,4 @@ public class UserService {
 
 
 
-    /**
-    //POST
-    public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
-        //중복
-        if(userProvider.checkEmail(postUserReq.getEmail()) ==1){
-            throw new BaseException(POST_USERS_EXISTS_EMAIL);
-        }
-
-        String pwd;
-        try{
-            //암호화
-            pwd = new SHA256().encrypt(postUserReq.getPassword());
-            postUserReq.setPassword(pwd);
-
-        } catch (Exception ignored) {
-            throw new BaseException(PASSWORD_ENCRYPTION_ERROR);
-        }
-        try{
-            int userIdx = userDao.createUser(postUserReq);
-            //jwt 발급.
-            String jwt = jwtService.createJwt(userIdx);
-            return new PostUserRes(jwt,userIdx);
-        } catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
-
-    public void modifyUserName(PatchUserReq patchUserReq) throws BaseException {
-        try{
-            int result = userDao.modifyUserName(patchUserReq);
-            if(result == 0){
-                throw new BaseException(MODIFY_FAIL_USERNAME);
-            }
-        } catch(Exception exception){
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
-     **/
 }
