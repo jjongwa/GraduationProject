@@ -25,7 +25,7 @@ public class UserDao {
      * @return int (생성한 유저의 idx를 반환)
      */
     public int createUser(PostUserReq postUserReq){
-        System.out.println("dao 진입");
+        //System.out.println("dao 진입");
         String createUserQuery = "insert into User (userId, userPw, userName) VALUES (?,?,?);";
         this.jdbcTemplate.update(createUserQuery, postUserReq.getUserId(), postUserReq.getUserPw_1(), postUserReq.getUserName());
         String lastInsertIdxQuery = "select last_insert_id()";

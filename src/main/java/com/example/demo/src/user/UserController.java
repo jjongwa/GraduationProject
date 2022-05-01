@@ -42,8 +42,8 @@ public class UserController {
     @ResponseBody
     @PostMapping("/checkId")
     public BaseResponse<String> checkId(@RequestBody PostCheckIdReq postCheckIdReq) {
-        System.out.println("체크 아이디 ");
-        System.out.println(postCheckIdReq.getUserId());
+        //System.out.println("체크 아이디 ");
+        //System.out.println(postCheckIdReq.getUserId());
         if (postCheckIdReq.getUserId() == null || postCheckIdReq.getUserId().length() == 0) {
             return new BaseResponse<>(USERS_EMPTY_ID);
         }
@@ -83,7 +83,7 @@ public class UserController {
             PostUserRes postUserRes = userService.createUser(postUserReq);
             return new BaseResponse<>(postUserRes);
         } catch (BaseException exception){
-            System.out.println("컨트롤러 예외처리 구문");
+            //System.out.println("컨트롤러 예외처리 구문");
             return new BaseResponse<>(exception.getStatus());
         }
     }

@@ -40,7 +40,7 @@ public class UserProvider {
         if(userDao.checkUserPw(userId, userPw) == 0){   // 비밀번호 확인
             throw new BaseException(USERS_EMPTY_USER_PW);   //USERS_EMPTY_USER_PW(false, 2011, "일치하는 비밀번호 없음.")
         }
-        System.out.println("아이디, 비밀번호 확인");
+        //System.out.println("아이디, 비밀번호 확인");
 
         try {
             PostLoginRes loginUserIdx = userDao.loginUser(userId, userPw);
