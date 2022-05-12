@@ -96,7 +96,20 @@ public class UserDao {
                 chkUserIdParm, chkUserPwParm);
     }
 
-
-
+    /**
+     * 특정 Idx에 해당하는 물품 리스트 생성
+     * @return
+     */
+    public (int userIdx){
+        String getUserQuery = "select U.Idx\n" +
+                "from User U\n" +
+                "where U.userId = ? and U.userPw = ?";
+        String chkUserIdParm = userId;
+        String chkUserPwParm = userPw;
+        return this.jdbcTemplate.queryForObject(getUserQuery,
+                (rs, rowNum) -> new PostLoginRes(
+                        rs.getInt("Idx")),
+                chkUserIdParm, chkUserPwParm);
+    }
 
 }
