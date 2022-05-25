@@ -92,7 +92,7 @@ public class UserController {
 
 /**
  * 로그인 API
- * [POST] /users/lonIn
+ * [POST] /users/logIn
  * @return BaseResponse<PostLoginRes>
  */
     @ResponseBody
@@ -110,7 +110,7 @@ public class UserController {
  * 로그인 API
  * [POST] /users/lonIn
  * @return BaseResponse<PostLoginRes>
- */
+
  @ResponseBody
  @GetMapping("List")
  public BaseResponse<> List(@RequestBody  ){
@@ -121,7 +121,7 @@ public class UserController {
          return new BaseResponse<>(exception.getStatus());
      }
  }
-
+*/
 // 메인화면 API -> 리스트 형식? 출력하면 몇개까지 가져올껀지
 // 레시피 화면 API -> 소요시간 DB에 새로 만들어야함 -> 타입 뭘로 할지 고민
 // 설정 부분 구체적인 UI 디자인 필요할듯
