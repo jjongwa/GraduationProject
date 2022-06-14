@@ -47,9 +47,29 @@ public class RecipeController {
         }
     }
 
+    @ResponseBody
+    @PostMapping("{userIdx}")
+    public BaseResponse<List<String>> createRecipe(@RequestBody PostRecipeReq postRecipeReq, @PathVariable("userIdx") int userIdx){
+        try{
+            List<String> getRecipe = recipeService.createRecipe(postRecipeReq, userIdx);
+            return new BaseResponse<>(getRecipe);
+        }
+        catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
 
-
-
-
+    @ResponseBody
+    @PostMapping("{userIdx}/like")
+    public BaseResponse<PostRecomRes> createRecommend(@RequestBody PostRecomReq postRecomReq, @PathVariable("userIdx") int userIdx){
+        try{
+            System.out.println("컨트롤러");
+            PostRecomRes postRecomRes = recipeService.createRecommend(postRecomReq,userIdx);
+            return new BaseResponse<>(postRecomRes);
+        }
+        catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
 
 }

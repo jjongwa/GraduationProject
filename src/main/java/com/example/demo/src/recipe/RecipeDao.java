@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -37,6 +38,9 @@ public class RecipeDao {
                 userIdx);
     }
 
+
+
+// 레시피 추가
     public PostCreateNewRecipe createNewRecipe(PostRecipeReq postRecipeReq, int userIdx){
         String createRecipeQuery  = "insert into Recipe(recipeName, userIdx, detail, makeTime)\n" +
                 "VALUES (?,?,?,?)";
@@ -52,11 +56,50 @@ public class RecipeDao {
         return recipeIdxandRes;
     }
 // 레시피 등록시 사진 첨부
-
+    public List<String> createRecipePicture(PostRecipeReq postRecipeReq, int recipeIdx){
+        List<String> pic = postRecipeReq.getPhoto();
+        List newPictureList = new ArrayList<>();
+        if(pic != null){
+            for(String newpic:pic){
+                String createRecipePicture = "insert into RecipePhoto(photoUrl, recipeIdx) values(?,?)";
+                this.jdbcTemplate.update(createRecipePicture,newpic, recipeIdx);
+                newPictureList.add(newpic);
+            }
+        }
+        return newPictureList;
+    }
 
 // 레시피 등록시 링크 첨부
+    public List<String> createRecipeLink(PostRecipeReq postRecipeReq, int recipeIdx){
+        List<String> url = postRecipeReq.getRecipeUrl();
+        List newLinkList = new ArrayList<>();
+        if(url != null){
+            for(String newurl:url) {
+                String createRecipeUrl = "insert into RecipeUrl(recipeUrl, recipeIdx) values (?,?)";
+                this.jdbcTemplate.update(createRecipeUrl,newurl, recipeIdx);
+                newLinkList.add(newurl);
+            }
+        }
+        return newLinkList;
+    }
 
-// 프론트랑 상의 후 진행 -> 사진, 링크 다 필수 아니라 예외처리 필요
+// 레시피 좋아요 누른 전적이 있는지
+    public int checkRecommend(PostRecomReq postRecomReq, int userIdx){
+        String checkRecommendRecipeByUserIdx = "select exists(select *\n" +
+                "from RecipeRecomend RR\n" +
+                "where RR.userIdx = ? and RR.recipeIdx = ?)";
+        return this.jdbcTemplate.queryForObject(checkRecommendRecipeByUserIdx, int.class, userIdx, postRecomReq.getRecipeIdx());
+    }
+
+
+// 레시피 좋아요 생성
+    public int createRecommend(PostRecomReq postRecomReq, int userIdx){
+        System.out.println("다오");
+        String createRecommendQuery = "insert into RecipeRecomend(userIdx, recipeIdx) values(?,?)";
+        this.jdbcTemplate.update(createRecommendQuery,userIdx, postRecomReq.getRecipeIdx());
+        String lastInsertIdxQuery ="select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdxQuery, int.class);
+    }
 
 
 

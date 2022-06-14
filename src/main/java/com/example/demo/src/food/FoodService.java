@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 import static com.example.demo.config.BaseResponseStatus.*;
 
 @Service
@@ -29,4 +31,19 @@ public class FoodService {
         this.jwtService = jwtService;
     }
 
+    // 식재료 추가 서비스
+    public PostFoodRes postFood(PostFoodReq postFoodReq,int userIdx) throws BaseException{
+        try{
+            int foodIdx = foodDao.postFoods(postFoodReq, userIdx);
+
+            return  new PostFoodRes(foodIdx, postFoodReq.getFoodName(), postFoodReq.getFoodPhoto(), postFoodReq.getCategoryIdx(), postFoodReq.getAmount(), postFoodReq.getStorageType(), postFoodReq.getExpirationDate());
+        }
+        catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+
+
 }
+

@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 // Service Create, Update, Delete 의 로직 처리
 @Service
 public class RecipeService {
@@ -26,6 +30,46 @@ public class RecipeService {
         this.recipeDao = recipeDao;
         this.recipeProvider = recipeProvider;
         this.jwtService = jwtService;
+    }
+
+// 레시피 등록
+    public List<String> createRecipe(PostRecipeReq postRecipeReq, int userIdx) throws BaseException{
+        try{
+            PostCreateNewRecipe newRecipeRes = recipeDao.createNewRecipe(postRecipeReq, userIdx);
+            int recipeIdx = newRecipeRes.getRecipeIdx();
+            PostRecipeRes RecipeDetail = newRecipeRes.getRecipeDetail();
+
+            List newRecipe = new ArrayList<PostRecipeRes>();
+            newRecipe.add(RecipeDetail);
+
+            List newRecipePictureList = recipeDao.createRecipePicture(postRecipeReq, recipeIdx);
+            List newRecipeUrlList = recipeDao.createRecipeLink(postRecipeReq, recipeIdx);
+
+            List newRecipeDetail = new ArrayList<>(Arrays.asList(newRecipe, newRecipePictureList, newRecipeUrlList));
+
+            return newRecipeDetail;
+        }
+        catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public PostRecomRes createRecommend(PostRecomReq postRecomReq, int userIdx) throws BaseException{
+        try{
+            System.out.println("서비스");
+            int checkAlreadyExist = recipeDao.checkRecommend(postRecomReq, userIdx);
+            if(checkAlreadyExist == 1){
+                System.out.println("이미 추천한 레시피");
+                throw new BaseException(DATABASE_ERROR);
+            }
+            else{
+                int recommendIdx = recipeDao.createRecommend(postRecomReq, userIdx);
+                return new PostRecomRes(recommendIdx, userIdx, postRecomReq.getRecipeIdx());
+            }
+        }
+        catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
     }
 
 

@@ -49,5 +49,16 @@ public class FoodDao {
                 GetUserIdx);
     }
 
+    // 식재료 추가 쿼리
+    public int postFoods(PostFoodReq postFoodReq, int userIdx){
+        String postFoodQuery = "insert into Food(userIdx, foodName, foodPhoto, categoryIdx, amount, storageType, expirationDate)\n" +
+                "VALUES (?,?,?,?,?,?,?)";
+        this.jdbcTemplate.update(postFoodQuery, userIdx, postFoodReq.getFoodName(), postFoodReq.getFoodPhoto(), postFoodReq.getCategoryIdx(), postFoodReq.getAmount(), postFoodReq.getStorageType(),postFoodReq.getExpirationDate());
+        String lastInsertIdxQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdxQuery, int.class);
+    }
+
+
+
 }
 

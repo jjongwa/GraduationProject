@@ -1,6 +1,7 @@
 package com.example.demo.src.food;
 import com.example.demo.src.food.FoodProvider;
 import com.example.demo.src.food.FoodService;
+import com.example.demo.src.user.model.PostLoginReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.demo.config.BaseException;
@@ -47,6 +48,19 @@ public class FoodController  {
             return new BaseResponse<>(exception.getStatus());
         }
     }
+
+    @ResponseBody
+    @PostMapping("{userIdx}")
+    public BaseResponse<PostFoodRes> createFood(@RequestBody PostFoodReq postFoodReq, @PathVariable("userIdx") int userIdx){
+        try{
+            PostFoodRes postFoodRes = foodService.postFood(postFoodReq, userIdx);
+            return new BaseResponse<>(postFoodRes);
+        }
+        catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
 
 }
 
