@@ -48,7 +48,7 @@ public class FoodService {
         try {
 
             System.out.println("위치2");
-            foodDao.updateFoods(postFoodReq, userIdx);
+            foodDao.updateFoods(postFoodReq, foodIdx);
 
             return new PostFoodRes(foodIdx, postFoodReq.getFoodName(), postFoodReq.getFoodPhoto(), postFoodReq.getCategoryIdx(), postFoodReq.getAmount(), postFoodReq.getStorageType(), postFoodReq.getExpirationDate());
         }
