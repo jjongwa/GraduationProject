@@ -18,9 +18,7 @@ public class CalenderDao {
 
 
     public List<GetCalenderFoodRes> getCalenderFoodResList(int userIdx){
-        String getC_FoodQuery = "select F.Idx,\n" +
-                "       F.foodName,\n" +
-                "       F.expirationDate\n" +
+        String getC_FoodQuery = "select F.Idx, F.foodName, SUBSTRING(F.expirationDate, 1, 10) date, SUBSTRING(F.expirationDate, 12) time\n" +
                 "from Food F\n" +
                 "join User U on U.Idx = F.userIdx\n" +
                 "where U.Idx = ?";
@@ -28,7 +26,9 @@ public class CalenderDao {
                 (rs,rowNum) -> new GetCalenderFoodRes(
                         rs.getInt("Idx"),
                         rs.getString("foodName"),
-                        rs.getString("expirationDate")),
+                        rs.getString("date"),
+                        rs.getString("time")
+                ),
                 userIdx);
     }
 

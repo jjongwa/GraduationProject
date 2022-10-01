@@ -6,10 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class GetRecipeRes {
-    private int Idx;
-    private String recipeName;
-    private String makeTime;
-    private String foodHave;
+public class GetRecipeDetailPhotoRes {
     private String photoUrl;
 }

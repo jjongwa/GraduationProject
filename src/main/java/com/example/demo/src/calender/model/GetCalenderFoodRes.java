@@ -10,5 +10,6 @@ import lombok.Setter;
 public class GetCalenderFoodRes {
     private int Idx;
     private String foodName;
-    private String expirationDate;
+    private String date;
+    private String time;
 }

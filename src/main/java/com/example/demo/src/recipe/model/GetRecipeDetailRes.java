@@ -3,17 +3,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
-public class PostRecipeReq {
-
-    private List<String> recipeUrl;
-    private List<String> Photo;
-    private List<String> igName;
-
+public class GetRecipeDetailRes {
     private String recipeName;
     private String detail;
     private String makeTime;
