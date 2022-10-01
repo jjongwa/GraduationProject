@@ -61,6 +61,20 @@ public class FoodController  {
         }
     }
 
+    @ResponseBody
+    @PatchMapping("/{userIdx}/{foodIdx}/update")
+    public BaseResponse<PostFoodRes> updateFood(@RequestBody PostFoodReq postFoodReq, @PathVariable("userIdx") int userIdx, @PathVariable("foodIdx") int foodIdx){
+        try{
+            System.out.println("위치1");
+            PostFoodRes postFoodRes = foodService.updateFood(postFoodReq, userIdx, foodIdx);
+            System.out.println(postFoodRes.getFoodName());
+            System.out.println(postFoodRes.getFoodPhoto());
+            return new BaseResponse<>(postFoodRes);
+        }
+        catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
 
 }
 

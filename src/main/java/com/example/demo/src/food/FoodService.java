@@ -43,6 +43,19 @@ public class FoodService {
         }
     }
 
+    //식재료 수정 서비스
+    public PostFoodRes updateFood(PostFoodReq postFoodReq, int userIdx, int foodIdx) throws BaseException{
+        try {
+
+            System.out.println("위치2");
+            foodDao.updateFoods(postFoodReq, userIdx);
+
+            return new PostFoodRes(foodIdx, postFoodReq.getFoodName(), postFoodReq.getFoodPhoto(), postFoodReq.getCategoryIdx(), postFoodReq.getAmount(), postFoodReq.getStorageType(), postFoodReq.getExpirationDate());
+        }
+        catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 
 
 }

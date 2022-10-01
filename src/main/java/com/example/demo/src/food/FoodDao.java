@@ -53,7 +53,22 @@ public class FoodDao {
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery, int.class);
     }
 
+    //식재료 수정 쿼리
+    public int updateFoods(PostFoodReq postFoodReq, int foodIdx){
+        System.out.println("위치3");
+        String updateFoodQuery = "update Food F\n" +
+                "set F.foodName = ?,\n" +
+                "    F.foodPhoto = ?,\n" +
+                "    F.categoryIdx = ?,\n" +
+                "    F.amount = ?,\n" +
+                "    F.storageType = ?,\n" +
+                "    F.expirationDate = ?\n" +
+                "where F.Idx = ?";
+        this.jdbcTemplate.update(updateFoodQuery, postFoodReq.getFoodName(), postFoodReq.getFoodPhoto(), postFoodReq.getCategoryIdx(), postFoodReq.getAmount(), postFoodReq.getStorageType(), postFoodReq.getExpirationDate(), foodIdx);
 
+        System.out.println("위치4");
+        return foodIdx;
+    }
 
 }
 
