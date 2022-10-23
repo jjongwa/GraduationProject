@@ -10,6 +10,7 @@ public class GetFoodRes {
     private int Idx;
     private String foodName;
     private String foodPhoto;
+    private int categoryIdx;
     private int amount;
     private int storageType;
     private String expirationDate;

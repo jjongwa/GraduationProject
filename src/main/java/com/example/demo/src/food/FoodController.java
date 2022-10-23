@@ -52,6 +52,27 @@ public class FoodController  {
     @ResponseBody
     @PostMapping("{userIdx}")
     public BaseResponse<PostFoodRes> createFood(@RequestBody PostFoodReq postFoodReq, @PathVariable("userIdx") int userIdx){
+        //식재료의 이름을 넣지 않았을 때
+        if (postFoodReq.getFoodName() == null || postFoodReq.getFoodName().length() == 0) {
+            return new BaseResponse<>(FOOD_EMPTY_NAME);
+        }
+        //식재료의 카테고리를 넣지 않았을 때
+        if (postFoodReq.getCategoryIdx() == 0) {
+            return new BaseResponse<>(FOOD_EMPTY_CATEGORY_ID);
+        }
+        //식재료의 수량을 넣지 않았을 때
+        if (postFoodReq.getAmount() == 0) {
+            return new BaseResponse<>(FOOD_EMPTY_AMOUNT);
+        }
+        //식재료의 보관방법을 넣지 않았을 때
+        if (postFoodReq.getStorageType() == 0) {
+            return new BaseResponse<>(FOOD_EMPTY_STORAGE_TYPE);
+        }
+        //식재료의 유통기한을 넣지 않았을 때
+        if (postFoodReq.getExpirationDate() == null) {
+            return new BaseResponse<>(FOOD_EMPTY_EXPIRATION_DATE);
+        }
+
         try{
             PostFoodRes postFoodRes = foodService.postFood(postFoodReq, userIdx);
             return new BaseResponse<>(postFoodRes);
