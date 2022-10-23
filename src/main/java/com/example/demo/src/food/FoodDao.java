@@ -21,7 +21,7 @@ public class FoodDao {
     public List<GetFoodRes> getFoods(int userIdx){
         //System.out.println("다오");
         //System.out.println(userIdx);
-        String getFoodsQuery ="select F.Idx, F.foodName, F.foodPhoto, F.amount, F.storageType, F.expirationDate,\n" +
+        String getFoodsQuery ="select F.Idx, F.foodName, F.foodPhoto, F.categoryIdx, F.amount, F.storageType, F.expirationDate,\n" +
                 "     case when 0 > timestampdiff(DAY , current_timestamp, F.expirationDate)\n" +
                 "            then timestampdiff(DAY , current_timestamp, F.expirationDate)\n" +
                 "        when 0 = timestampdiff(DAY , current_timestamp, F.expirationDate) && 0 > timestampdiff(SECOND , current_timestamp, F.expirationDate)\n" +
@@ -37,6 +37,7 @@ public class FoodDao {
                         rs.getInt("Idx"),
                         rs.getString("foodName"),
                         rs.getString("foodPhoto"),
+                        rs.getInt("categoryIdx"),
                         rs.getInt("amount"),
                         rs.getInt("storageType"),
                         rs.getString("expirationDate"),

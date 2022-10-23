@@ -33,6 +33,12 @@ public enum BaseResponseStatus {
     RECIPE_EMPTY_PHOTO(false, 2020, "레시피의 사진을 넣어주세요."),
     RECIPE_EMPTY_INGREDIENT(false, 2021, "레시피의 재료을 넣어주세요."),
 
+    // food
+    FOOD_EMPTY_NAME(false, 2030,"식재료의 이름을 넣어주세요"),
+    FOOD_EMPTY_CATEGORY_ID(false, 2031,"식재료의 카테고리를 넣어주세요"),
+    FOOD_EMPTY_AMOUNT(false, 2032,"식재료의 수량을 넣어주세요"),
+    FOOD_EMPTY_STORAGE_TYPE(false, 2033,"식재료의 보관방법을 넣어주세요"),
+    FOOD_EMPTY_EXPIRATION_DATE(false, 2034,"식재료의 유통기한을 넣어주세요"),
 
     /**
      * 3000 : Response 오류
