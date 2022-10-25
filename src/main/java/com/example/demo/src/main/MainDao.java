@@ -19,7 +19,7 @@ public class MainDao {
 
     public List<GetMainFoodRes> getMainFoodResList(int userIdx){
         System.out.println("foodDao");
-        String getListQuery = "select F.Idx, F.foodName, F.foodPhoto, F.amount, F.storageType, F.expirationDate,\n" +
+        String getListQuery = "select F.Idx, F.foodName, F.foodPhoto, F.amount, F.storageType, DATE(F.expirationDate) as expirationDate,\n" +
                 "     case when 0 > timestampdiff(DAY , current_timestamp, F.expirationDate)\n" +
                 "            then timestampdiff(DAY , current_timestamp, F.expirationDate)\n" +
                 "        when 0 = timestampdiff(DAY , current_timestamp, F.expirationDate) && 0 > timestampdiff(SECOND , current_timestamp, F.expirationDate)\n" +
