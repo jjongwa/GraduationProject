@@ -57,6 +57,26 @@ public class FoodService {
         }
     }
 
+    //식재료 삭제 서비스
+    public int deleteFood(int userIdx, int foodIdx) throws BaseException{
+        try {
+            System.out.println("삭제 Service 호출");
+            int checkMyFood = foodDao.checkMyFood(userIdx, foodIdx);
+            System.out.println(checkMyFood);
+            if(checkMyFood == 0){
+                System.out.println("삭제 Service 잘못리턴");
+                return 0;
+            }
+            else {
+                foodDao.deleteFood(foodIdx);
+                System.out.println("삭제 Service 리턴");
+                return 1;
+            }
+        }
+        catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 
 }
 

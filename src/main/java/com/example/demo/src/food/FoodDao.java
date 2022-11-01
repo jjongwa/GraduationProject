@@ -29,7 +29,7 @@ public class FoodDao {
                 "        else timestampdiff(DAY , current_timestamp, F.expirationDate)\n" +
                 "          end ED_Left\n" +
                 "from Food F\n" +
-                "where F.userIdx = ?\n" +
+                "where F.userIdx = ? and F.status = 1\n" +
                 "order by expirationDate";
         int GetUserIdx = userIdx;
         return this.jdbcTemplate.query(getFoodsQuery,
@@ -71,5 +71,24 @@ public class FoodDao {
         return foodIdx;
     }
 
+    //식재료 삭제(비활성화) 쿼리
+    public void deleteFood(int foodIdx) {
+        System.out.println("삭제 Dao호출");
+        String deleteFoodQuery = "update Food F\n" +
+                "set F.status = 2\n" +
+                "where F.Idx = ?";
+        this.jdbcTemplate.update(deleteFoodQuery, foodIdx);
+        System.out.println("삭제 Dao리턴");
+    }
+
+    //식재료 본인 확인 쿼리
+    public int checkMyFood(int userIdx, int foodIdx) {
+        System.out.println("체크 Dao호출");
+        String checkMyFoodQuery = "select exists (select *\n" +
+                "from Food F\n" +
+                "where F.userIdx = ? and F.Idx =?) as isMyFood";
+        System.out.println("체크 Dao호출2");
+        return this.jdbcTemplate.queryForObject(checkMyFoodQuery, int.class, userIdx, foodIdx);
+    }
 }
 

@@ -97,5 +97,21 @@ public class FoodController  {
         }
     }
 
+    @ResponseBody
+    @PatchMapping("/{userIdx}/{foodIdx}/delete")
+    public BaseResponse<String> deleteFood(@PathVariable("userIdx") int userIdx, @PathVariable("foodIdx") int foodIdx){
+        try{
+            int deleteFood = foodService.deleteFood(userIdx, foodIdx);
+            if(deleteFood == 0){
+                throw new BaseException(INVALID_USER_JWT);
+            }
+            else {
+                return new BaseResponse<>("상품 삭제 성공");
+            }
+        }catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
 }
 
