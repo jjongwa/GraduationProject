@@ -27,7 +27,7 @@ public class MainDao {
                 "        else timestampdiff(DAY , current_timestamp, F.expirationDate)\n" +
                 "          end ED_Left\n" +
                 "from Food F\n" +
-                "where F.userIdx = ?\n" +
+                "where F.userIdx = ? and F.status = 1\n" +
                 "order by expirationDate";
         int GetUserIdx = userIdx;
         return this.jdbcTemplate.query(getListQuery,
