@@ -1,4 +1,5 @@
 # 냉장고 관리 애플리케이션 - Server
+
 ###2022 홍익대학교 졸업 프로젝트
 
 ## 프로젝트 배경 및 동기
@@ -15,7 +16,7 @@
   - version: MySQL 8.0.28
 
 - 프레임워크: SpringBoot
-- Tool: ueryTool(ERD 설계), DataGrip(쿼리 작성 및 테스트), IntelliJ(코드 작성 IDE), PostMan(API 테스트)
+- Tool: AQueryTool(ERD 설계), DataGrip(쿼리 작성 및 테스트), IntelliJ(코드 작성 IDE), PostMan(API 테스트)
 
 ## 소프트웨어 구성도
 <img width="451" alt="구성도" src="https://user-images.githubusercontent.com/77482065/203695178-accc4896-f66e-4eb5-99b5-37f0475ef463.png">
@@ -74,4 +75,5 @@
   <img width="769" alt="회원가입2" src="https://user-images.githubusercontent.com/77482065/203704725-f0c455bf-150c-4e27-a514-ab1454671f63.png">
   <img width="776" alt="회원가입3" src="https://user-images.githubusercontent.com/77482065/203705048-f0903518-722f-483d-b819-61b3e37df415.png">
   <img width="722" alt="회원가입4" src="https://user-images.githubusercontent.com/77482065/203705225-d2426538-e462-4b06-9629-9d5c01dadc32.png">
-  ![image](https://user-images.githubusercontent.com/77482065/203705406-ba631c01-624a-4467-9015-fec61814c5ea.png)
+  <img width="722" alt="회원가입4" src="https://user-images.githubusercontent.com/77482065/203706871-9d53c8c3-f7ca-4a00-89f2-e4b85dc05b4b.png">
+
