@@ -39,7 +39,7 @@
   - 사용자가 직접 새로운 레시피 추가
   - 레시피 좋아요 기능으로 다시 보고싶은 레시피 모으기
 
-### QR코드 인식 기능 예시
+### 구현한 QR코드 인식 기능 예시
 ![qrcode_reader](https://user-images.githubusercontent.com/77482065/203701826-60a7dd91-a256-4a77-8b89-80da94c137e9.gif)
 
 
